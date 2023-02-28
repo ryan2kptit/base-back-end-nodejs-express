@@ -18,14 +18,10 @@ require('./dbs/init.mongodb')
 
 const { checkOverLoad } = require('./helpers/check.connect')
 // checkOverLoad()
+
+
 // init routes
-app.get('/', (req, res, next) => {
-    const strCompress = 'Ayo nigga'
-    return res.status(200).json({
-        message: "Hello and goodbye",
-        metadata: strCompress.repeat(100000)
-    })
-})
+app.use('', require('./routes/index'))
 
 //handing error
 
