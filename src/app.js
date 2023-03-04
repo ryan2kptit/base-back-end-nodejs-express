@@ -10,7 +10,10 @@ app.use(morgan("dev"))       // use for development
 // app.use(morgan("combined"))  // use for production
 app.use(helmet())               
 app.use(compression())          // compress data response
-
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 
 
 // init db
