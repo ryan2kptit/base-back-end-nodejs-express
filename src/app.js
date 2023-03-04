@@ -24,7 +24,7 @@ const { checkOverLoad } = require('./helpers/check.connect')
 
 
 // init routes
-app.use('', require('./routes/index'))
+app.use('/', require('./routes/index'))
 
 //handing error
 

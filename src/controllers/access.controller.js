@@ -1,16 +1,15 @@
 'use strict'
 
+const AccessService = require("../services/access.service");
+
 class AccessController {
 
     signUp = async ( req, res, next) => {
         try {
             console.log('req.body :>> ', req.body);
-            return res.status(201).json({
-                code: '20001',
-                metadata: {
-                    userId: 1
-                }
-            })
+            const { name, email, password} = req.body
+            const newShop = await AccessService.signUp({name, email, password});
+            return res.status(201).json(newShop)
         } catch (error) {
             next(error)
         }

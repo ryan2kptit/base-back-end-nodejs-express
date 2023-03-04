@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const KeyTokenService = require("./key-token.service")
 const { createTokenPair } = require("../auth/auth-utils")
+const { getInfoData } = require("../utils")
 const RoleShop = {
     SHOP: 'SHOP',
     WRITER: 'WRITER',
@@ -28,32 +29,38 @@ class AccessService {
 
             if(newShop) {
                 // create privateKey, publicKey
-                const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-                    modulusLength: 4096
-                })
+                // const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {   // dang bat doi xung, Buffer
+                //     modulusLength: 4096,
+                //     publicKeyEncoding: {
+                //         type: 'pkcs1',                          ==> he thong lon
+                //         format: 'pem'
+                //     },
+                //     privateKeyEncoding: {
+                //         type: 'pkcs1',
+                //         format: 'pem'
+                //     }
+                // })
 
-                console.log('privateKey :>> ', privateKey);
-                console.log('publicKey :>> ', publicKey);
+                const publicKey = crypto.randomBytes(64).toString('hex')
+                const privateKey = crypto.randomBytes(64).toString('hex')
 
-                const publicKeyString = await KeyTokenService.createKeyToken({
+                const keyStore = await KeyTokenService.createKeyToken({
                     userId: newShop._id,
-                    publicKey
+                    publicKey,
+                    privateKey
                 })
 
-                if(!publicKeyString) {
+                if(!keyStore) {
                     return {
                         code: 'xxx',
                         message: 'publicKeyString error'
                     }
                 }
-
                 const tokens = await createTokenPair({userId: newShop._id, email}, publicKey, privateKey)
-                console.log('tokens :>> ', tokens);
-
                 return {
                     code: 201,
                     metadata: {
-                        shop: newShop,
+                        shop: getInfoData({fields: ['_id', 'email', 'name'], object: newShop}),
                         tokens
                     }
                 }
