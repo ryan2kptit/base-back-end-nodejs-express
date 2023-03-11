@@ -6,6 +6,7 @@ const crypto = require('crypto')
 const KeyTokenService = require("./key-token.service")
 const { createTokenPair } = require("../auth/auth-utils")
 const { getInfoData } = require("../utils")
+const { BadRequestError } = require("../common/response/error.response")
 const RoleShop = {
     SHOP: 'SHOP',
     WRITER: 'WRITER',
@@ -14,13 +15,10 @@ const RoleShop = {
 }
 class AccessService {
     static signUp = async ({ name, email, password}) => {
-        try {
+        // try {
             const holderShop = await shopModel.findOne({email}).lean()
             if(holderShop) {
-                return {
-                    code: 'xxx',
-                    message: 'Shop already registered'
-                }
+                throw new BadRequestError('Error: Shop already registed')
             }
             const hashedPassword = await bcrypt.hash(password, 10)
             const newShop = await shopModel.create({
@@ -71,13 +69,13 @@ class AccessService {
                 metadata: null
             }
             
-        } catch (error) {
-            return {
-                code: 'xxx',
-                message: error.message,
-                status: 'error'
-            }
-        }
+        // } catch (error) {
+        //     return {
+        //         code: 'xxx',
+        //         message: error.message,
+        //         status: 'error'
+        //     }
+        // }
     }
 }
 
