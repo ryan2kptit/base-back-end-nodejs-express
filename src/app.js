@@ -27,6 +27,19 @@ const { checkOverLoad } = require('./helpers/check.connect')
 app.use('/', require('./routes/index'))
 
 //handing error
+app.use((req, res, next) => {
+    const error = new Error('not found');
+    error.status = 404;
+    next(error)
+})
 
+app.use((error, req, res, next) => {
+    const statusCode = error.status || 500;
+    return res.status(statusCode).json({
+        status: 'error',
+        code: statusCode,
+        message: error.message || 'Internal Error'
+    })
+})
 
 module.exports = app

@@ -3,7 +3,8 @@ const { findById } = require("../services/api-key.service")
 
 const HEADER = {
     API_KEY: 'x-api-key',
-    AUTHORIZATION: 'authorization'
+    AUTHORIZATION: 'authorization',
+    CLIENT_ID: 'x-client-id'
 }
 
 const apiKey = async (req, res, next) => {
@@ -58,5 +59,6 @@ const asyncHandler = fn => {
 module.exports = {
     apiKey,
     permission,
-    asyncHandler
+    asyncHandler,
+    HEADER
 }

@@ -1,3 +1,4 @@
+const { Types } = require("mongoose");
 const keyTokenModel = require("../models/key-token.model")
 
 
@@ -18,12 +19,15 @@ class KeyTokenService {
             options = { upsert: true, new: true }
 
             const tokens = await keyTokenModel.findOneAndUpdate(filter, update, options)
-            console.log('tokens :>> ', tokens);
 
             return tokens ? tokens.publicKey : null
         } catch (error) {
             return error
         }
+    }
+
+    static findByUserId = async (userId) => {
+        return keyTokenModel.findOne({user: Types.ObjectId(userId)}).lean()
     }
 }
 

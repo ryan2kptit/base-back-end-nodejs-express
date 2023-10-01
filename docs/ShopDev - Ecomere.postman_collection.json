@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "f61cdc34-14ef-4d04-a271-64fbf3f084e3",
+		"name": "ShopDev - Ecomere",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13093433"
+	},
+	"item": [
+		{
+			"name": "Access",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "7c4b8003654b73f9e9d4843edf27a8c82c433f96e50d497cddd9251deb4c5a450ab365c13a717bf92738b96d4aa446306765740b315e9fc3368c3e20f953f552",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Drity coin\",\n    \"email\": \"abcd123@gmail.com\",\n    \"password\": \"123445678910\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/v1/shops/sign-up",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"shops",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "7c4b8003654b73f9e9d4843edf27a8c82c433f96e50d497cddd9251deb4c5a450ab365c13a717bf92738b96d4aa446306765740b315e9fc3368c3e20f953f552",
+								"description": "x-",
+								"type": "text"
+							},
+							{
+								"key": "x-client-id",
+								"value": "65194cc4561cc9ee72c81798",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NGNjNDU2MWNjOWVlNzJjODE3OTgiLCJlbWFpbCI6ImFiY2QxMjNAZ21haWwuY29tIiwiaWF0IjoxNjk2MTU2ODY4LCJleHAiOjE2OTYzMjk2Njh9.bb8i45HGSOavhklRWC0WjS3ixEW5AJPvJb45sxRm1HU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_name\": \"product 07\",\n    \"product_thumb\": \"link images\",\n    \"product_description\": \"introduce about product 07\",\n    \"product_price\": 30,\n    \"product_quantity\": 30,\n    \"product_type\": \"Furniture\",\n    \"product_attributes\": {\n        \"brand\": \"Dirty Coin 07\",\n        \"size\": \"L\",\n        \"material\": \"99% Cotton\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

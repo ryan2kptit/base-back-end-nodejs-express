@@ -1,13 +1,15 @@
 const { ReasonPhrases, StatusCodes } = require("../../utils/httpStatusCode")
 
 const StatusCode = {
+    NOT_FOUND: 404,
     FORBIDDEN: 403,
     BAD_REQUEST: 400
 }
 
 const MessageError = {
     FORBIDDEN: '',
-    BAD_REQUEST: 'Bad request error'
+    BAD_REQUEST: 'Bad request error',
+    NOT_FOUND: 'Not found'
 }
 
 class ErrorResponse extends Error {
@@ -30,7 +32,15 @@ class AuthFailureError extends ErrorResponse {
     }
 }
 
+class NotFoundRequestError extends ErrorResponse {
+
+    constructor(message = MessageError.NOT_FOUND, statusCode = StatusCode.NOT_FOUND) {
+        super(message, statusCode)
+    }
+}
+
 module.exports = {
     BadRequestError,
-    AuthFailureError
+    AuthFailureError,
+    NotFoundRequestError
 }
